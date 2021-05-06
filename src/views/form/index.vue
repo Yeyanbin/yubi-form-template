@@ -74,7 +74,7 @@ export default {
     const formLineList = [
       {
         gutter: 20,
-        showProp: () => true,
+        // showProp: () => true,
         formItemList: [ statusSelect, operatorSelect, nameInput ]
       },
       {
