@@ -94,7 +94,7 @@ interface IForm {
 }
 
 interface IFormLine {
-  showProp: (formData: any) => Boolean; // formData => formData.status === 1 
+  show: (formData: any) => Boolean; // formData => formData.status === 1 
   formItemList: IFormItem[];
   gutter?: number;
   minHeight?: number | string; 
@@ -133,7 +133,7 @@ const resetButton: (IFormItem & IButton & IElButton) = {
   click: (vm: any, formName: string) => {
     vm.$refs[formName].resetFields();
   }
-}
+} 
   
 const nameInput: (IInput & IElInput & IFormItem) = {
   type: 'input',
@@ -143,7 +143,7 @@ const nameInput: (IInput & IElInput & IFormItem) = {
 }
 
 const formLine: IFormLine = {
-  showProp: () => true,
+  show: () => true,
   formItemList: [ statusSelect, submitButton, resetButton ]
 }
   
