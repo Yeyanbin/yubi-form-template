@@ -55,7 +55,7 @@ interface IElButton {
 interface IElInput {
   clearable?: boolean;
   size?: 'medium' | 'small' | 'mini';
-  placeholder: string;
+  placeholder?: string;
 }
 
 interface IButton {
@@ -70,9 +70,9 @@ interface IInput {
 type TFormItem = 'select' | 'input' | 'button' | 'radios' | 'checkboxes' | 'buttonGroup';
 
 interface IFormItem {
+  type: TFormItem;
   prop?: string; // 这个是v-model的值
   label?: string;
-  type: TFormItem;
   size?: 'medium' | 'small' | 'mini'; // 控制该表单域下的组件大小
   width?: string;
   span?: number; // default 4
@@ -94,6 +94,7 @@ interface IForm {
 }
 
 interface IFormLine {
+  title?: string;
   show: (formData: any) => Boolean; // formData => formData.status === 1 
   formItemList: IFormItem[];
   gutter?: number;

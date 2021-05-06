@@ -90,7 +90,9 @@ export default {
     }
 
     const rules = {
-      status: { required: true }
+      status: { required: true },
+      name: { required: true }
+
     }
 
     const myForm = {
