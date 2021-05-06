@@ -43,6 +43,8 @@ interface IElCheckboxes {
 }
 
 interface IElButton {
+  text: string;
+  click: (vm: any, formName: string, formData: any) => void;
   buttonType?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text';
   size?: 'medium' | 'small' | 'mini';
   round?: boolean;
@@ -53,21 +55,21 @@ interface IElButton {
 }
 
 interface IElInput {
+  inputType: 'text' | 'textarea' | 'password';
   clearable?: boolean;
   size?: 'medium' | 'small' | 'mini';
   placeholder?: string;
 }
 
 interface IButton {
-  text: string;
-  click: (vm: any, formName: string, formData: any) => void;
+
 }
 
 interface IInput {
-  inputType: 'text' | 'textarea' | 'password';
+
 }
 
-type TFormItem = 'select' | 'input' | 'button' | 'radios' | 'checkboxes' | 'buttonGroup';
+type TFormItem = 'select' | 'input' | 'button' | 'radios' | 'checkboxes' | 'buttonGroup' | 'switch' | 'inputNumber';
 
 interface IFormItem {
   type: TFormItem;
