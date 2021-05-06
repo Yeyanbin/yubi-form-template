@@ -41,6 +41,14 @@ export default {
       inputType: 'text',
       placeholder: '请输入名字...',
     }
+
+    const startDescInput = {
+      type: 'input',
+      prop: 'startDescription',
+      label: '开始状态描述',
+      inputType: 'textarea',
+      // placeholder: '请输入...',
+    }
       
     const submitButton = {
       text: '提交',
@@ -74,11 +82,14 @@ export default {
     const formLineList = [
       {
         gutter: 20,
-        // show: () => true,
         formItemList: [ statusSelect, operatorSelect, nameInput ]
       },
       {
-        show: () => true,
+        gutter: 20,
+        show: (formData) => formData.status === 0,
+        formItemList: [ startDescInput ]
+      },
+      {
         formItemList: [ submitButton, resetButton ]
       }
     ]
