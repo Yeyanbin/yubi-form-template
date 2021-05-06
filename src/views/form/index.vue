@@ -33,17 +33,26 @@ export default {
         { label: 'Xin', value: 1 }
       ],
     }
+
+    const nameInput = {
+      type: 'input',
+      prop: 'name',
+      label: '名字',
+      inputType: 'text',
+      placeholder: '请输入名字...',
+    }
       
     const submitButton = {
       text: '提交',
       type: 'button',
-      span: 2,
+      span: 4,
       buttonType: 'primary',
-      click: (vm, formName) => {
+      click: (vm, formName, formData) => {
         console.log(vm, )
         vm.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
+            console.log(formData)
           } else {
             console.log('error submit!!');
             return false;
@@ -55,7 +64,7 @@ export default {
     const resetButton = {
       text: '重置',
       type: 'button',
-      span: 2,
+      span: 4,
       click: (vm, formName) => {
         vm.$refs[formName].resetFields();
       }
@@ -66,7 +75,7 @@ export default {
       {
         gutter: 20,
         showProp: () => true,
-        formItemList: [ statusSelect, operatorSelect ]
+        formItemList: [ statusSelect, operatorSelect, nameInput ]
       },
       {
         showProp: () => true,
@@ -74,9 +83,10 @@ export default {
       }
     ]
 
-    const formData = {
+    const defaultFormData = {
       status: 0,
-      // operator
+      // operator: 0,
+      // name: '默认名字'
     }
 
     const rules = {
@@ -85,7 +95,7 @@ export default {
 
     const myForm = {
       ref: 'myForm',
-      formData,
+      defaultFormData,
       rules,
       width: 600,
       labelWidth: 100, // or '100px'

@@ -1,12 +1,12 @@
 <template>
-  <div class="app-container">
-    <el-form :ref="formConfig.ref" :model="formData" :rules="formConfig.rules" :label-position="formConfig.labelPosition" label-width="120px">
+  <div class="app-container" :style="`width: ${formConfig.width || 800}px;`">
+    <el-form :ref="formConfig.ref" :model="formData" :rules="formConfig.rules" label-suffix=":" :label-position="formConfig.labelPosition" label-width="120px">
       <el-row v-for="(line, index) of formConfig.formLineList" :key="`${formConfig.ref}-line-${index}`" :gutter="line.gutter || 10">
-        <template v-if="line.showProp()">
-          <el-col v-for="(formItem, index) of line.formItemList" 
-            :span="(formItem.span || 4)"
-            :key="`${formConfig.ref}-${formItem.label}-${formItem.type}-${index}`">
-            <el-form-item :label="formItem.label? formItem.label: ' '" :prop="formItem.prop? formItem.prop : ''">
+        <template v-if="line.showProp">
+          <el-col v-for="formItem of line.formItemList" 
+            :span="(formItem.span || 8)"
+            :key="`${formConfig.ref}-${formItem.label}-${formItem.type}-${formItem.prop || formItem.text}`">
+            <el-form-item :label="formItem.label" :prop="formItem.prop">
               <template v-if="formItem.type === 'button'">
                 <el-button :type="formItem.buttonType" @click="func(formItem.click)">
                   {{ formItem.text }}
@@ -19,6 +19,9 @@
                     :key="`${formConfig.ref}-${formItem.label}-${option.label}-${option.value}`">
                   </el-option>
                 </el-select>
+              </template>
+              <template v-if="formItem.type === 'input'">
+                <el-input :type="formItem.inputType" v-model="formData[formItem.prop]"></el-input>
               </template>
             </el-form-item>
           </el-col>
@@ -41,7 +44,7 @@ export default {
   },
   created() {
     console.log('yubi-form create')
-    this.formData = this.formConfig.formData;
+    this.formData = this.formConfig.defaultFormData;
     console.log(this.formConfig)
   },
   methods: {
