@@ -2,7 +2,7 @@
   <div class="app-container" :style="`width: ${formConfig.width || 800}px;`">
     <el-form :ref="formConfig.ref" :model="formData" :rules="formConfig.rules" label-suffix=":" :label-position="formConfig.labelPosition" label-width="120px">
       <el-row v-for="(line, index) of formConfig.formLineList" :key="`${formConfig.ref}-line-${index}`" :gutter="line.gutter || 10">
-        <template v-if="line.showProp !== undefined? line.showProp() : true ">
+        <template v-if="line.show !== undefined? line.show() : true ">
           <el-col v-for="formItem of line.formItemList" 
             :span="(formItem.span || 8)"
             :key="`${formConfig.ref}-${formItem.label}-${formItem.type}-${formItem.prop || formItem.text}`">
