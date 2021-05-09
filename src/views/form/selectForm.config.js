@@ -1,5 +1,20 @@
 import { useButton, useInput, useSelect } from '../../components/YubiForm/createItem';
 
+let selectFormStore = {
+  debug: true,
+  state: {
+    message: 'Hello!'
+  },
+  setMessageAction (newValue) {
+    if (this.debug) console.log('setMessageAction triggered with', newValue)
+    this.state.message = newValue
+  },
+  clearMessageAction () {
+    if (this.debug) console.log('clearMessageAction triggered')
+    this.state.message = ''
+  }
+}
+
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
   { province_id: 1, province_name: '广西省' },
@@ -7,7 +22,7 @@ const provinceList = [
   { province_id: 3, province_name: '福建省' },
 ];
 
-const cityList = [
+let cityList = [
   { city_id: 0, province_id: 0, city_name: '广州市' },
   { city_id: 1, province_id: 0, city_name: '佛山市' },
   { city_id: 2, province_id: 0, city_name: '肇庆市' },
@@ -16,6 +31,15 @@ const cityList = [
   { city_id: 5, province_id: 2, city_name: '长沙市' },
   { city_id: 6, province_id: 3, city_name: '厦门市' },
 ];
+
+let i = 0
+export const updateCity = () => {
+  ++i;
+  cityList = [
+    { city_id: 6+i, province_id: 0, city_name: 'AA市'+i+'' },
+    ...cityList
+  ]
+}
 
 const ProvinceSelect = useSelect(
   'province_id',
@@ -86,7 +110,7 @@ const rules = {
   city_id: { required: true }
 }
   
-export default {
+export const SelectForm = {
   ref: 'selectForm',
   defaultFormData,
   rules,

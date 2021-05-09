@@ -60,7 +60,8 @@ const resetButton = {
   _type: 'button',
   span: 4,
   _click: (vm, formConfig) => {
-    vm.$refs[formConfig.ref].resetFields();
+    // vm.$refs[formConfig.ref].resetFields();
+    statusSelect.options.push({ label: 'Test', value: 3 })
   }
 }
     

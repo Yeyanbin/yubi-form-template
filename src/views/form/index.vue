@@ -2,9 +2,10 @@
   <div class="app-container">
     <yubi-form :formConfig="myForm" />
     <div>
-      ---
+      --- 
+      <el-button @click="updateCity"></el-button>
     </div>
-    <yubi-form :formConfig="selectForm" />
+    <yubi-form :formConfig="SelectForm" />
   </div>
 </template>
 
@@ -12,24 +13,24 @@
 
 import YubiForm from '../../components/YubiForm';
 import myForm from './myForm.config';
-import selectForm from './selectForm.config';
+import { SelectForm, updateCity } from './selectForm.config';
 
 export default {
   components: {
     YubiForm
   },
   data() {
-    
+
     return {
       myForm,
-      selectForm
+      SelectForm
     }
   },
   created() {
   },
 
   methods: {
-
+    updateCity
   }
 }
 
