@@ -10,15 +10,12 @@ interface IElSelect {
   options: ISelectOption[];
   size?: 'medium' | 'small' | 'mini';
   clearable?: boolean;
-
-  watchProp?: string;
-  watchFunc?: () => ISelectOption[]; // getOptions []
 }
 
 interface IELRadios {
   change: (label: string | number | boolean) => void;
   size?: 'medium' | 'small' | 'mini';
-  isButton: boolean; // el-radio or el-radio-button
+  isButton?: boolean; // el-radio or el-radio-button
   options: {
     label: string | number | boolean;
     disabled: boolean;
@@ -30,15 +27,15 @@ interface IELRadios {
 interface IElCheckboxes {
   change: (newValue: any) => void;
   size?: 'medium' | 'small' | 'mini';
-  isButton: boolean; // el-Checkbox or el-Checkbox-button
-  options: {
+  isButton?: boolean; // el-Checkbox or el-Checkbox-button
+  options?: {
     label?: string | number | boolean;
     trueLabel?: string | number;
     falseLabel?: string | number;
-    disabled: boolean;
-    border: boolean;
-    name: string;
-    checked: boolean;
+    disabled?: boolean;
+    border?: boolean;
+    name?: string;
+    checked?: boolean;
   }[];
 }
 
@@ -59,14 +56,6 @@ interface IElInput {
   clearable?: boolean;
   size?: 'medium' | 'small' | 'mini';
   placeholder?: string;
-}
-
-interface IButton {
-
-}
-
-interface IInput {
-
 }
 
 type TFormItem = 'select' | 'input' | 'button' | 'radios' | 'checkboxes' | 'buttonGroup' | 'switch' | 'inputNumber';
@@ -93,6 +82,8 @@ interface IForm {
   width: string | number;
   ref: string;
   formLineList: IFormLine[];
+  watchProp?: string;
+  watchFunc?: (formData) => void;
 }
 
 interface IFormLine {
@@ -114,7 +105,7 @@ const statusSelect: (IFormItem & IElSelect) = {
   ],
 }
 
-const submitButton: (IFormItem & IButton & IElButton) = {
+const submitButton: (IFormItem & IElButton) = {
   text: '提交',
   type: 'button',
   buttonType: 'primary',
@@ -130,7 +121,7 @@ const submitButton: (IFormItem & IButton & IElButton) = {
   }
 }
 
-const resetButton: (IFormItem & IButton & IElButton) = {
+const resetButton: (IFormItem & IElButton) = {
   text: '重置',
   type: 'button',
   click: (vm: any, formName: string) => {
@@ -138,7 +129,7 @@ const resetButton: (IFormItem & IButton & IElButton) = {
   }
 } 
   
-const nameInput: (IInput & IElInput & IFormItem) = {
+const nameInput: (IElInput & IFormItem) = {
   type: 'input',
   prop: 'name',
   inputType: 'text',

@@ -5,23 +5,12 @@
         <template v-if="line.show !== undefined? line.show(formData) : true ">
           <el-col v-for="formItem of line.formItemList" 
             :span="(formItem.span || 8)"
-            :key="`${formConfig.ref}-${formItem.label}-${formItem.type}-${formItem.prop || formItem.text}`">
-            <el-form-item :label="formItem.label" :prop="formItem.prop">
-              <template v-if="formItem.type === 'button'">
-                <el-button :type="formItem.buttonType" @click="func(formItem.click)">
-                  {{ formItem.text }}
-                </el-button>
-              </template>
-              <template v-if="formItem.type === 'select'">
-                <el-select v-model="formData[formItem.prop]">
-                  <el-option v-for="option of formItem.options"
-                    :label="option.label" :value="option.value"
-                    :key="`${formConfig.ref}-${formItem.label}-${option.label}-${option.value}`">
-                  </el-option>
-                </el-select>
-              </template>
-              <template v-if="formItem.type === 'input'">
-                <el-input :type="formItem.inputType" v-model="formData[formItem.prop]"></el-input>
+            :key="`${formConfig.ref}-${formItem.label}-${formItem._type}-${formItem._prop || formItem.text}`">
+            <el-form-item :label="formItem.label" :prop="formItem._prop">
+              <template v-if="formItem._type">
+                <component :is="`yubi-${formItem._type}`" 
+                  v-bind="{ formConfig, formData, formItem, that }" 
+                  v-model="formData[formItem._prop]"></component>
               </template>
             </el-form-item>
           </el-col>
@@ -32,29 +21,45 @@
 </template>
 
 <script>
+import YubiComponent from './components';
+
 export default {
   data() {
     return {
-      formData: {
-      }
+      formData: {},
+      that: {},
     }
   },
   props: {
     formConfig: Object,
   },
+  components: {
+    ...YubiComponent
+  },
   created() {
     console.log('yubi-form create')
-    this.formData = this.formConfig.defaultFormData;
+    // this.formData
+    let obj = {}
+    this.formConfig.formLineList.forEach(line => {
+      line.formItemList.forEach(item => {
+        item._prop && (obj[item._prop] = undefined)
+      });
+    })
+    this.formData = {
+      ...obj,
+      ...this.formConfig.defaultFormData,
+    }
     console.log(this.formConfig)
+    this.that = this;
+  },
+  mounted() {
   },
   methods: {
-    func(clickFunc) {
-      clickFunc(this, this.formConfig.ref, this.formData);
-    }
+    // func(clickFunc) {
+    //   clickFunc(this, this.formConfig.ref, this.formData);
+    // }
   }
 }
-
-
 </script>
 
 <style scoped>
