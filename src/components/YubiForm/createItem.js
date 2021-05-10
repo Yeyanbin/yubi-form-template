@@ -17,14 +17,14 @@ export const useButton = function(
   // prop,
   text,
   click,
-  options,
+  elButtonAttrs,
 ) {
   return {
     _type: 'button',
     // _prop: prop,
     text,
     _click: click,
-    ...options,
+    ...elButtonAttrs,
   }
 }
 
@@ -37,13 +37,15 @@ export const useButton = function(
 export const useInput = function(
   prop,
   label,
-  options,
+  elInputAttrs,
+  watch,
 ) {
   return {
     _type: 'input',
     _prop: prop,
+    _watch: watch,
     label,
-    ...options,
+    ...elInputAttrs,
   }
 }
 
@@ -51,13 +53,15 @@ export const useInput = function(
 export const useSelect = function(
   prop,
   label,
-  options,
+  elSelectAttrs,
+  watch,
 ) {
   return {
     _type: 'select',
     _prop: prop,
+    _watch: watch,
     label,
-    ...options,
+    ...elSelectAttrs,
   }
 }
 

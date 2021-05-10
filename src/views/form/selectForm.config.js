@@ -45,14 +45,16 @@ const ProvinceSelect = useSelect(
   'province_id',
   '省份',
   {
-    options: (...args) => {
-      const [,,formData ] = args;
-      formData.city_id = undefined; 
-      return provinceList.map(item => ({
+    options: provinceList.map(item => ({
         value: item.province_id,
         label: item.province_name
-      }))
-    }
+      })),
+  },
+  (province_id, formData) => {
+    CitySelect.options 
+      = cityList.filter(item => item.province_id === province_id)
+      .map(item => { return { label: item.city_name, value: item.city_id }});
+    CitySelect.options.length > 0 && (formData.city_id = CitySelect.options[0].value); 
   }
 )
 
@@ -60,17 +62,8 @@ const CitySelect = useSelect(
   'city_id',
   '城市',
   {
-    options: function(...args) {
-      const [ ,,formData ] = args;
-      
-      return Number.isInteger(formData.province_id)? 
-        cityList.filter(v => v.province_id === formData.province_id).map(item => ({
-          value: item.city_id,
-          label: item.city_name,
-        }))
-      : [];
-    }
-  }
+    options: []
+  },
 )
 
 const SubmitButton = useButton(

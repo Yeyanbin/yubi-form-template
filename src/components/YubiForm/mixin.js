@@ -16,11 +16,12 @@ export const ModelMixin = {
     modelValue: function(n) {
       // console.log(this.formItem._prop,' modelChange：', n)
       this.$emit('change', n);
+      this.formItem._watch && this.formItem._watch(n, this.formData);
     },
     value: function(n) {
-      console.log(this.formItem._prop,' value: ',n)
+      // console.log(this.formItem._prop,' value: ',n)
       this.modelValue = n;
-    }
+    },
   },
   created() {
     this.modelValue = this.value;
