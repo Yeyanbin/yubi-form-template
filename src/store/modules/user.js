@@ -32,49 +32,49 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
+      // login({ username: username.trim(), password: password }).then(response => {
+        const { data } = 'TEST_TOKEN'
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+      // getInfo(state.token).then(response => {
+      //   const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
-
+      //   if (!data) {
+      //     return reject('Verification failed, please Login again.')
+      //   }
+        let data = { name: 'Test0', avatar: 'Test1' }
         const { name, avatar } = data
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
+      // logout(state.token).then(() => {
+        // removeToken() // must remove  token  first
         resetRouter()
         commit('RESET_STATE')
         resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
