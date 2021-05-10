@@ -1,4 +1,4 @@
-import { useButton, useRadios, useInput, useSelect } from '../../components/YubiForm/createItem';
+import { useButton, useRadios, useInput, useSwitch, useSelect } from '../../components/YubiForm/createItem';
 
 
 const provinceList = [
@@ -110,6 +110,12 @@ const wantChildRadios = useRadios(
   }
 )
 
+const cityGuySwitch = useSwitch(
+  'isCityGuy',
+  '是否城镇户籍',
+)
+
+
 const SubmitButton = useButton(
   '提交', 
   (vm, formConfig, formData) => {
@@ -128,6 +134,17 @@ const SubmitButton = useButton(
     type: 'primary',
   }
 )
+
+const resetButton = {
+  text: '重置',
+  _type: 'button',
+  span: 4,
+  _click: (vm, formConfig) => {
+    vm.$refs[formConfig.ref].resetFields();
+  }
+}
+
+
 const formLineList = [
   {
     gutter: 20,
@@ -140,10 +157,10 @@ const formLineList = [
   },
   {
     gutter: 20,
-    formItemList: [ ProvinceSelect, CitySelect ]
+    formItemList: [ ProvinceSelect, CitySelect, cityGuySwitch]
   },
   {
-    formItemList: [ SubmitButton ]
+    formItemList: [ SubmitButton, resetButton ]
   },
 ]
 

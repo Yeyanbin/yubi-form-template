@@ -81,3 +81,18 @@ export const useRadios = function(
   }
 }
 
+export const useSwitch = function(
+  prop,
+  label,
+  elSwitchAttrs,
+  watch,
+) {
+  return {
+    _type: 'switch',
+    _prop: prop,
+    _watch: watch,
+    label,
+    ...elSwitchAttrs,
+  }
+}
+

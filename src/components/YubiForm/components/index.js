@@ -4,6 +4,7 @@ import YubiButton from './YubiButton';
 import YubiInput from './YubiInput';
 import YubiSelect from './YubiSelect';
 import YubiRadios from './YubiRadios';
+import YubiSwitch from './YubiSwitch';
 
 
 export default {
@@ -11,4 +12,5 @@ export default {
   YubiInput,
   YubiSelect,
   YubiRadios,
+  YubiSwitch,
 }
