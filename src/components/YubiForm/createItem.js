@@ -66,4 +66,18 @@ export const useSelect = function(
 }
 
 
+export const useRadios = function(
+  prop,
+  label,
+  elRadiosAttrs,
+  watch,
+) {
+  return {
+    _type: 'radios',
+    _prop: prop,
+    _watch: watch,
+    label,
+    ...elRadiosAttrs,
+  }
+}
 

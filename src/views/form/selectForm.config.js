@@ -1,19 +1,5 @@
-import { useButton, useInput, useSelect } from '../../components/YubiForm/createItem';
+import { useButton, useRadios, useInput, useSelect } from '../../components/YubiForm/createItem';
 
-let selectFormStore = {
-  debug: true,
-  state: {
-    message: 'Hello!'
-  },
-  setMessageAction (newValue) {
-    if (this.debug) console.log('setMessageAction triggered with', newValue)
-    this.state.message = newValue
-  },
-  clearMessageAction () {
-    if (this.debug) console.log('clearMessageAction triggered')
-    this.state.message = ''
-  }
-}
 
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
@@ -41,6 +27,28 @@ export const updateCity = () => {
   ]
 }
 
+const GenderRadios = useRadios(
+  'gender',
+  '性别',
+  {
+    options: [
+      { label: '男', value: 0 },
+      { label: '女', value: 1 },
+    ]
+  }
+)
+
+const SingleRadios = useRadios(
+  'single',
+  '是否单身',
+  {
+    options: [
+      { label: '是', value: 0 },
+      { label: '否', value: 1 },
+    ]
+  }
+)
+
 const ProvinceSelect = useSelect(
   'province_id',
   '省份',
@@ -66,6 +74,42 @@ const CitySelect = useSelect(
   },
 )
 
+const marriageSelect = useSelect(
+  'marriage',
+  '婚姻状况',
+  {
+    options: [
+      { label: '未婚', value: 0 },
+      { label: '已婚', value: 1 },
+      { label: '离异', value: 2 },
+      { label: '丧偶', value: 3 },
+    ]
+  }
+)
+
+const hasChildRadios = useRadios(
+  'hasChild',
+  '是否有孩子',
+  {
+    options: [
+      { label: '无', value: 0 },
+      { label: '有', value: 1 },
+    ]
+  }
+)
+
+const wantChildRadios = useRadios(
+  'wantChild',
+  '是否打算备孕',
+  {
+    options: [
+      { label: '无', value: 0 },
+      { label: '有', value: 1 },
+    ],
+    show: (formData) => formData.hasChild === 0 && formData.gender === 1,
+  }
+)
+
 const SubmitButton = useButton(
   '提交', 
   (vm, formConfig, formData) => {
@@ -85,6 +129,15 @@ const SubmitButton = useButton(
   }
 )
 const formLineList = [
+  {
+    gutter: 20,
+    formItemList: [ GenderRadios, SingleRadios ]
+  },
+  {
+    gutter: 20,
+    show: (formData) => formData.single === 1,
+    formItemList: [ marriageSelect, hasChildRadios, wantChildRadios ]
+  },
   {
     gutter: 20,
     formItemList: [ ProvinceSelect, CitySelect ]
