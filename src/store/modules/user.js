@@ -5,8 +5,8 @@ import { resetRouter } from '@/router'
 const getDefaultState = () => {
   return {
     token: getToken() || 'token',
-    name: '',
-    avatar: ''
+    name: 'Test',
+    avatar: 'Test'
   }
 }
 
