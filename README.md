@@ -16,7 +16,7 @@
     <img src="https://img.shields.io/badge/vue-router-3.0.6-green.svg">
   </span>
   <span>
-    <img src="https://img.shields.io/badge/Jsx-green.svg">
+    <img src="https://img.shields.io/badge/Jsx-blue.svg">
   </span>
 </div>
 
