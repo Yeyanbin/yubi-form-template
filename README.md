@@ -2,6 +2,24 @@
 
 ### 这是一个yubi-form [demo](https://yeyanbin.github.io/yubi-form-template/dist/#/form/index)
 
+<div align="center">
+  <span>
+    <img src="https://img.shields.io/badge/Vue-2.6.10-green.svg">
+  </span>
+  <span>
+    <img src="https://img.shields.io/badge/element-ui-2.13.2-green.svg">
+  </span>
+  <span>
+    <img src="https://img.shields.io/badge/vuex-3.1.0-green.svg">
+  </span>
+  <span>
+    <img src="https://img.shields.io/badge/vue-router-3.0.6-green.svg">
+  </span>
+  <span>
+    <img src="https://img.shields.io/badge/Jsx-green.svg">
+  </span>
+</div>
+
 对 Element ui的form组件进行二次封装。
 
 > 是对配置化表单的一个小小的探索。
