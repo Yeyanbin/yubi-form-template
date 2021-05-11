@@ -16,6 +16,8 @@
 demo：`/views/form`, 两个表单配置文件
 
 - 支持el-form的组件的属性，同时也支持将其变成方法来获取属性值。
+  - [handleAttrs和handleFunc方法](https://github.com/Yeyanbin/yubi-form-template/blob/master/src/components/YubiForm/mixin.js#L40)
+  - [封装的组件中使用](https://github.com/Yeyanbin/yubi-form-template/blob/85b03d8dc01c0cfaf1830085a786c34abc99bd9b/src/components/YubiForm/components/YubiRadios.js#L13)
 
 ```
 // 例如下面的type属性
