@@ -2,7 +2,7 @@
 [demo](https://yeyanbin.github.io/yubi-form-template/dist/#/form/index)
 
 <div align="center">
-  <h1>这是yubi-form, 配置化表单的小尝试..</h1>
+  <h1>这是yubi-form, 配置化表单的小尝试....</h1>
   <span>
     <img src="https://img.shields.io/badge/vue-2.6.10-green.svg">
   </span>
