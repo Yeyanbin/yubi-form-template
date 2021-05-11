@@ -1,4 +1,4 @@
-
+![toDemo](https://yeyanbin.github.io/yubi-form-template/dist/#/form/index)
 
 ### 这是一个yubi-form demo
 
