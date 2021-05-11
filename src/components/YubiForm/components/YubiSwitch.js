@@ -8,7 +8,7 @@ const YubiSwitch = {
       BaseMixin,
     ],
     render() {
-      const { formConfig, formItem, handleAttrs, handleFunc } = this;
+      const { formItem, handleAttrs } = this;
       return (
         <el-switch {...{ attrs: handleAttrs(formItem) }} v-model={this.modelValue}>
         </el-switch>

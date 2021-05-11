@@ -34,15 +34,15 @@ const startDescInput = {
   span: 18,
   label: '开始状态描述',
   type: 'textarea',
-  // placeholder: '请输入...',
 }
   
 const submitButton = useButton('提交', 
   (vm, formConfig, formData) => {
     vm.$refs[formConfig.ref].validate((valid) => {
       if (valid) {
-        alert('submit!');
+        // alert('submit!');
         console.log(formData)
+        console.log(vm.$refs[formConfig.ref].getFormData())
       } else {
         console.log('error submit!!');
         return false;

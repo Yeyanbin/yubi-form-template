@@ -1,7 +1,7 @@
 
 /**
  * 使用按钮
- * @param { string } text 
+ * @param { String } text 
  * @param { (vm, formConfig, formData) => void } click 
  * @param { {
  *    buttonType?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text';
@@ -30,9 +30,10 @@ export const useButton = function(
 
 /**
  * 
- * @param {*} prop 
- * @param { * } option el-input attrs
- * @returns 
+ * @param {String} prop 
+ * @param {String} label 
+ * @param { Object } elInputAttrs el-input attrs
+ * @return {Object} input的配置项
  */
 export const useInput = function(
   prop,
@@ -49,7 +50,13 @@ export const useInput = function(
   }
 }
 
-
+/**
+ * 
+ * @param {String} prop 
+ * @param {String} label 
+ * @param { Object } elSelectAttrs el-select attrs
+ * @return {Object} 
+ */
 export const useSelect = function(
   prop,
   label,
@@ -65,7 +72,14 @@ export const useSelect = function(
   }
 }
 
-
+/**
+ * 
+ * @param {String} prop 
+ * @param {String} label 
+ * @param { Object } elRadiosAttrs el- attrs
+ * @param { (newValue, oldValue) => void } watch 
+ * @return {Object} 
+ */
 export const useRadios = function(
   prop,
   label,

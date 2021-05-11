@@ -121,8 +121,9 @@ const SubmitButton = useButton(
   (vm, formConfig, formData) => {
     vm.$refs[formConfig.ref].validate((valid) => {
       if (valid) {
-        alert('submit!');
         console.log(formData)
+        console.log(vm.$refs[formConfig.ref].getFormData());
+
       } else {
         console.log('error submit!!');
         return false;

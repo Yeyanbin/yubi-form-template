@@ -53,6 +53,21 @@ export default {
     this.that = this;
   },
   mounted() {
+
+    this.$refs[this.formConfig.ref].getFormData = () => {
+      const resObj = {};
+      this.formConfig.formLineList.forEach(line => {
+        if ( !line.show || line.show(this.formData) ) {
+          line.formItemList.forEach(item => {
+            if ( item._prop && (!item.show || item.show(this.formData)) ) {
+              this.formData[item._prop] !== undefined && (resObj[item._prop] = this.formData[item._prop]);
+            }
+          }, this);
+        }
+      }, this)
+      console.log(resObj)
+      return resObj;
+    }
   },
   methods: {
     // func(clickFunc) {
