@@ -56,7 +56,9 @@ const submitButton = useButton('提交',
 
 - 2021-5-12 增加了YubiForm对el-form封装时，增加了getFormData方法，增加了`Checkbox (未测试)`
   - 其筛选了一些被隐藏的选项
+  
 ![](./doc/img/getFormData.png);
+
 ```
 // 上面情况中，直接获取FormData可能会导致以下数据
 {
