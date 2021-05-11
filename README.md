@@ -4,16 +4,16 @@
 
 <div align="center">
   <span>
-    <img src="https://img.shields.io/badge/Vue-2.6.10-green.svg">
+    <img src="https://img.shields.io/badge/vue-2.6.10-green.svg">
   </span>
   <span>
-    <img src="https://img.shields.io/badge/element-ui-2.13.2-green.svg">
+    <img src="https://img.shields.io/badge/element ui-2.13.2-green.svg">
   </span>
   <span>
     <img src="https://img.shields.io/badge/vuex-3.1.0-green.svg">
   </span>
   <span>
-    <img src="https://img.shields.io/badge/vue-router-3.0.6-green.svg">
+    <img src="https://img.shields.io/badge/vue router-3.0.6-green.svg">
   </span>
   <span>
     <img src="https://img.shields.io/badge/Jsx-blue.svg">
