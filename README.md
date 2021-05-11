@@ -1,5 +1,5 @@
-[github](https://github.com/Yeyanbin/yubi-form-template) 
-[demo](https://yeyanbin.github.io/yubi-form-template/dist/#/form/index)
+- to [Github Repo](https://github.com/Yeyanbin/yubi-form-template) 
+- to [Github Page](https://yeyanbin.github.io/yubi-form-template/dist/#/form/index)
 
 <div align="center">
   <h1>这是yubi-form, 配置化表单的小尝试....</h1>
@@ -21,8 +21,6 @@
 </div>
 
 对 Element ui的form组件进行二次封装。
-
-> 是对配置化表单的一个小小的探索。
 
 ### 实现的目标
 1. 在一个表单项变更时去关联另一个表单项
