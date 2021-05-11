@@ -15,6 +15,25 @@
 组件：`/components/YubiForm` 
 demo：`/views/form`, 两个表单配置文件
 
+- 支持el-form的组件的属性，同时也支持将其变成方法来获取属性值。
+
+```
+// 例如下面的type属性
+const submitButton = useButton('提交', 
+  (vm, formConfig, formData) => {
+    vm.$refs[formConfig.ref].validate((valid) => {
+      if (valid) {
+        // todo...
+      }
+    });
+  }, 
+  {
+    span: 5,
+    type: (vm, _, formData) => formData.status === 0? 'primary': 'warning',
+  }
+)
+```
+
 ### Update
 
 - 2021-5-12 增加了YubiForm对el-form封装时，增加了getFormData方法，增加了`Checkbox (未测试)`
