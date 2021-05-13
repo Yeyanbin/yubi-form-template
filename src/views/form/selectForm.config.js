@@ -49,6 +49,36 @@ const SingleRadios = useRadios(
   }
 )
 
+const HandsomeRadios = useRadios(
+  'handsome',
+  '丑吗？',
+  {
+    options: [
+      { label: '丑', value: 0 },
+      { label: '不丑', value: 1 },
+      { label: '帅哥你懂吧', value: 2 },
+    ],
+    rules: (formData) => {
+      return {
+        type: 'number',
+        validator: function (rule, value, callback) {
+          console.log(this);
+          console.log(rule);
+
+          if (value === undefined) {
+            callback();
+          } else if (value === 2 && formData.single === 0) {
+            callback(new Error('帅哥还单身？臭逼就臭逼，还不敢认了？'));
+          } else {
+            callback();
+          }
+        }
+      }
+    },
+    span: 12,
+  }
+)
+
 const ProvinceSelect = useSelect(
   'province_id',
   '省份',
@@ -155,6 +185,11 @@ const formLineList = [
     gutter: 20,
     show: (formData) => formData.single === 1,
     formItemList: [ marriageSelect, hasChildRadios, wantChildRadios ]
+  },
+  {
+    gutter: 20,
+    show: (formData) => formData.gender === 0,
+    formItemList: [ HandsomeRadios ]
   },
   {
     gutter: 20,

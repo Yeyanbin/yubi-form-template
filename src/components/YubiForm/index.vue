@@ -6,7 +6,7 @@
           <el-col v-for="formItem of line.formItemList" 
             :span="(formItem.span || 8)"
             :key="`${formConfig.ref}-${formItem.label}-${formItem._type}-${formItem._prop || formItem.text}`">
-            <el-form-item :label="formItem.label" :prop="formItem._prop" v-if="formItem.show !== undefined? formItem.show(formData): true">
+            <el-form-item :label="formItem.label" :rules="formItem.rules && formItem.rules(formData)" :prop="formItem._prop" v-if="formItem.show !== undefined? formItem.show(formData): true">
               <template v-if="formItem._type">
                 <component :is="`yubi-${formItem._type}`" 
                   v-bind="{ formConfig, formData, formItem, that }" 
