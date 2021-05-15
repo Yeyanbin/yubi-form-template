@@ -14,14 +14,12 @@
  *   } } option 
  */
 export const useButton = function(
-  // prop,
   text,
   click,
   elButtonAttrs,
 ) {
   return {
     _type: 'button',
-    // _prop: prop,
     text,
     _click: click,
     ...elButtonAttrs,

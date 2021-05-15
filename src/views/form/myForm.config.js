@@ -1,4 +1,4 @@
-import { useButton, useInput, useSelect } from '../../components/YubiForm/createItem';
+import { useButton, useInput, useSelect } from '../../components/YubiForm/createFormElement';
 
 const statusSelect = {
   _type: 'select',
@@ -37,10 +37,9 @@ const startDescInput = {
 }
   
 const submitButton = useButton('提交', 
-  (vm, formConfig, formData) => {
+  ({vm, formConfig, formData}) => {
     vm.$refs[formConfig.ref].validate((valid) => {
       if (valid) {
-        // alert('submit!');
         console.log(formData)
         console.log(vm.$refs[formConfig.ref].getFormData())
       } else {
@@ -51,7 +50,8 @@ const submitButton = useButton('提交',
   }, 
   {
     span: 5,
-    type: (vm, _, formData) => formData.status === 0? 'primary': 'warning',
+    type: ({formData}) => formData.status === 0? 'primary': 'warning',
+    // type: (vm, _, formData) => formData.status === 0? 'primary': 'warning',
   }
 )
   
@@ -59,7 +59,7 @@ const resetButton = {
   text: '重置',
   _type: 'button',
   span: 4,
-  _click: (vm, formConfig) => {
+  _click: ({vm, formConfig}) => {
     vm.$refs[formConfig.ref].resetFields();
   }
 }
@@ -72,7 +72,7 @@ const formLineList = [
   },
   {
     gutter: 20,
-    show: (formData) => formData.status === 0,
+    show: ({formData}) => formData.status === 0,
     formItemList: [ startDescInput ]
   },
   {

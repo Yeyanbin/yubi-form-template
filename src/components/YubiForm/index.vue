@@ -6,10 +6,14 @@
           <el-col v-for="formItem of line.formItemList" 
             :span="(formItem.span || 8)"
             :key="`${formConfig.ref}-${formItem.label}-${formItem._type}-${formItem._prop || formItem.text}`">
-            <el-form-item :label="formItem.label" :rules="formItem.rules && formItem.rules(formData)" :prop="formItem._prop" v-if="formItem.show !== undefined? formItem.show(formData): true">
+            <el-form-item 
+              :label="formItem.label" 
+              :rules="formItem.rules && formItem.rules(formData)" 
+              :prop="formItem._prop" 
+              v-if="formItem.show !== undefined? formItem.show(formData): true">
               <template v-if="formItem._type">
                 <component :is="`yubi-${formItem._type}`" 
-                  v-bind="{ formConfig, formData, formItem, that }" 
+                  v-bind="{ formConfig, formData, formItem, that, dispatch }" 
                   v-model="formData[formItem._prop]"></component>
               </template>
             </el-form-item>
@@ -21,13 +25,18 @@
 </template>
 
 <script>
+
 import YubiComponent from './components';
+import useFormFunc from './hooks/useFormFunc';
+import useWatchProp from './hooks/useWatchProp';
+import useDataInit from './hooks/useDataInit';
 
 export default {
   data() {
     return {
       formData: {},
       that: {},
+      dispatch: undefined,
     }
   },
   props: {
@@ -38,41 +47,14 @@ export default {
   },
   created() {
     console.log('yubi-form create')
-    // this.formData
-    let obj = {}
-    this.formConfig.formLineList.forEach(line => {
-      line.formItemList.forEach(item => {
-        item._prop && (obj[item._prop] = undefined)
-      });
-    })
-    this.formData = {
-      ...obj,
-      ...this.formConfig.defaultFormData,
-    }
-    console.log(this.formConfig)
-    this.that = this;
   },
   mounted() {
-
-    this.$refs[this.formConfig.ref].getFormData = () => {
-      const resObj = {};
-      this.formConfig.formLineList.forEach(line => {
-        if ( !line.show || line.show(this.formData) ) {
-          line.formItemList.forEach(item => {
-            if ( item._prop && (!item.show || item.show(this.formData)) ) {
-              this.formData[item._prop] !== undefined && (resObj[item._prop] = this.formData[item._prop]);
-            }
-          }, this);
-        }
-      }, this)
-      console.log(resObj)
-      return resObj;
-    }
+    useDataInit(this);
+    useWatchProp(this);
+    useFormFunc(this);
   },
   methods: {
-    // func(clickFunc) {
-    //   clickFunc(this, this.formConfig.ref, this.formData);
-    // }
+
   }
 }
 </script>

@@ -1,5 +1,4 @@
-import { useButton, useRadios, useInput, useSwitch, useSelect } from '../../components/YubiForm/createItem';
-
+import { useButton, useRadios, useSwitch, useSelect } from '../../components/YubiForm/createFormElement';
 
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
@@ -18,15 +17,6 @@ let cityList = [
   { city_id: 6, province_id: 3, city_name: '厦门市' },
 ];
 
-let i = 0
-export const updateCity = () => {
-  ++i;
-  cityList = [
-    { city_id: 6+i, province_id: 0, city_name: 'AA市'+i+'' },
-    ...cityList
-  ]
-}
-
 const GenderRadios = useRadios(
   'gender',
   '性别',
@@ -34,7 +24,8 @@ const GenderRadios = useRadios(
     options: [
       { label: '男', value: 0 },
       { label: '女', value: 1 },
-    ]
+    ],
+    span: 6,
   }
 )
 
@@ -45,7 +36,8 @@ const SingleRadios = useRadios(
     options: [
       { label: '是', value: 0 },
       { label: '否', value: 1 },
-    ]
+    ],
+    span: 6,
   }
 )
 
@@ -61,14 +53,12 @@ const HandsomeRadios = useRadios(
     rules: (formData) => {
       return {
         type: 'number',
-        validator: function (rule, value, callback) {
-          console.log(this);
-          console.log(rule);
+        validator: function (_, value, callback) {
 
           if (value === undefined) {
             callback();
-          } else if (value === 2 && formData.single === 0) {
-            callback(new Error('帅哥还单身？臭逼就臭逼，还不敢认了？'));
+          } else if (value === 2 && formData.gender === 0 && formData.single === 0) {
+            callback(new Error('帅哥还单身？丑逼就丑逼，还不敢认了？'));
           } else {
             callback();
           }
@@ -76,6 +66,7 @@ const HandsomeRadios = useRadios(
       }
     },
     span: 12,
+    show: (formData) => formData.gender === 0,
   }
 )
 
@@ -88,11 +79,14 @@ const ProvinceSelect = useSelect(
         label: item.province_name
       })),
   },
-  (province_id, formData) => {
-    CitySelect.options 
-      = cityList.filter(item => item.province_id === province_id)
-      .map(item => { return { label: item.city_name, value: item.city_id }});
-    CitySelect.options.length > 0 && (formData.city_id = CitySelect.options[0].value); 
+  (province_id, { formData, dispatch }) => {
+
+    const cityOptions = cityList
+                          .filter(item => item.province_id === province_id)
+                          .map(item => ({ label: item.city_name, value: item.city_id }));
+
+    dispatch('CitySelect', 'options', cityOptions);
+    cityOptions.length > 0 && (formData.city_id = cityOptions[0].value); 
   }
 )
 
@@ -104,7 +98,7 @@ const CitySelect = useSelect(
   },
 )
 
-const marriageSelect = useSelect(
+const MarriageSelect = useSelect(
   'marriage',
   '婚姻状况',
   {
@@ -117,7 +111,7 @@ const marriageSelect = useSelect(
   }
 )
 
-const hasChildRadios = useRadios(
+const HasChildRadios = useRadios(
   'hasChild',
   '是否有孩子',
   {
@@ -128,7 +122,7 @@ const hasChildRadios = useRadios(
   }
 )
 
-const wantChildRadios = useRadios(
+const WantChildRadios = useRadios(
   'wantChild',
   '是否打算备孕',
   {
@@ -140,7 +134,7 @@ const wantChildRadios = useRadios(
   }
 )
 
-const cityGuySwitch = useSwitch(
+const CityGuySwitch = useSwitch(
   'isCityGuy',
   '是否城镇户籍',
 )
@@ -148,7 +142,7 @@ const cityGuySwitch = useSwitch(
 
 const SubmitButton = useButton(
   '提交', 
-  (vm, formConfig, formData) => {
+  ({vm, formConfig, formData}) => {
     vm.$refs[formConfig.ref].validate((valid) => {
       if (valid) {
         console.log(formData)
@@ -166,11 +160,11 @@ const SubmitButton = useButton(
   }
 )
 
-const resetButton = {
+const ResetButton = {
   text: '重置',
   _type: 'button',
   span: 4,
-  _click: (vm, formConfig) => {
+  _click: ({vm, formConfig}) => {
     vm.$refs[formConfig.ref].resetFields();
   }
 }
@@ -179,24 +173,19 @@ const resetButton = {
 const formLineList = [
   {
     gutter: 20,
-    formItemList: [ GenderRadios, SingleRadios ]
+    formItemList: { GenderRadios, SingleRadios, HandsomeRadios }
   },
   {
     gutter: 20,
     show: (formData) => formData.single === 1,
-    formItemList: [ marriageSelect, hasChildRadios, wantChildRadios ]
+    formItemList: { MarriageSelect, HasChildRadios, WantChildRadios }
   },
   {
     gutter: 20,
-    show: (formData) => formData.gender === 0,
-    formItemList: [ HandsomeRadios ]
+    formItemList: { ProvinceSelect, CitySelect, CityGuySwitch }
   },
   {
-    gutter: 20,
-    formItemList: [ ProvinceSelect, CitySelect, cityGuySwitch]
-  },
-  {
-    formItemList: [ SubmitButton, resetButton ]
+    formItemList: { SubmitButton, ResetButton }
   },
 ]
 
@@ -217,4 +206,7 @@ export const SelectForm = {
   labelWidth: 100, // or '100px'
   labelPosition: 'top',
   formLineList,
+  onUpdate: (context) => {
+    console.log('formData update. ', context)
+  }
 }
