@@ -52,7 +52,7 @@ const submitButton = useButton('提交',
 )
 ```
 
-### Update
+### Update List
 
 - 2021-5-12 增加了YubiForm对el-form封装时，增加了getFormData方法，增加了`Checkbox (未测试)`
   - 其筛选了一些被隐藏的选项
@@ -79,3 +79,9 @@ const submitButton = useButton('提交',
   single: 0,
 }
 ```
+
+- 2021-5-16
+1. 增加有限状态机（但目前只有onUpdate，FormData更新时触发）
+2. 增加IoC设计分发设置组件的值的行为
+3. YubiForm的初始化逻辑封装到hooks
+4. 二次封装组件的mixin，增加attr白名单，还有方法attr的传参用context包住。
