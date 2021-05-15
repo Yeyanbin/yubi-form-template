@@ -9,8 +9,18 @@ const YubiSelect = {
     ],
     render() {
       const { formConfig, formItem, handleAttrs, handleFunc } = this;
+
+      const scopedSlots = {
+        prefix: function(scope) {
+          console.log('prepend', scope)
+          return (
+            <i class="el-input__icon el-icon-search"></i>
+          );
+        }
+      }
       return (
-        <el-select {...{ attrs: handleAttrs(formItem) }} v-model={this.modelValue}>
+        <el-select 
+          {...{ attrs: handleAttrs(formItem), scopedSlots }} v-model={this.modelValue}>
           {
             handleFunc(formItem.options, this).map(option => {
               return (
