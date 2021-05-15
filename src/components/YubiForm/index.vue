@@ -32,24 +32,23 @@ import useWatchProp from './hooks/useWatchProp';
 import useDataInit from './hooks/useDataInit';
 
 export default {
-  data() {
-    return {
-      formData: {},
-      that: {},
-      dispatch: undefined,
-    }
+
+  components: {
+    ...YubiComponent
   },
   props: {
     formConfig: Object,
   },
-  components: {
-    ...YubiComponent
+  data() {
+    return {
+      ...useDataInit(this.formConfig),
+      that: this,
+    }
   },
   created() {
     console.log('yubi-form create')
   },
   mounted() {
-    useDataInit(this);
     useWatchProp(this);
     useFormFunc(this);
   },

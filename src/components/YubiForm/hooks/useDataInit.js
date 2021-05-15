@@ -1,11 +1,10 @@
 import { useStore } from '../utils/store';
 
-export default (that) => {
+export default (formConfig) => {
   let obj = {};
+  const { addComponent, dispatch } = useStore(formConfig);
 
-  const { addComponent, dispatch } = useStore(that.formConfig);
-
-  that.formConfig.formLineList.forEach(line => {
+  formConfig.formLineList.forEach(line => {
     addComponent(line.formItemList);
 
     Object.keys(line.formItemList).forEach(key => {
@@ -14,12 +13,13 @@ export default (that) => {
     });
   });
 
-  that.formData = {
+  const formData = {
     ...obj,
-    ...that.formConfig.defaultFormData,
+    ...formConfig.defaultFormData,
   }
 
-
-  that.that = that;
-  that.dispatch = dispatch;
+  return {
+    dispatch,
+    formData,
+  }
 }

@@ -18,6 +18,6 @@ export const useStateMachine = (update) => {
   }
 
   return {
-    send
+    send  
   }
 }
