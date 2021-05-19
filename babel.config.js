@@ -3,6 +3,11 @@ module.exports = {
     // https://github.com/vuejs/vue-cli/tree/master/packages/@vue/babel-preset-app
     '@vue/cli-plugin-babel/preset',
     // '@vue/babel-preset-jsx'
+    // ['@vue/babel-preset-jsx',
+    //   {
+    //     'injectH': false
+    //   }
+    // ],
   ],
   'env': {
     'development': {

@@ -1,4 +1,4 @@
-import { useButton, useRadios, useSwitch, useSelect } from '../../components/YubiForm/createFormElement';
+import { useButton, useRadios, useSwitch, useSelect, useSlot } from '../../components/YubiForm/createFormElement';
 
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
@@ -137,6 +137,11 @@ const WantChildRadios = useRadios(
 const CityGuySwitch = useSwitch(
   'isCityGuy',
   '是否城镇户籍',
+  {
+    slots: {
+      text: ({formData}, h/* 必须声明h但不能使用，因为会自动使用 */) => (<span>{  formData.isCityGuy? '城市人': '农村人' }</span>),
+    }
+  }
 )
 
 

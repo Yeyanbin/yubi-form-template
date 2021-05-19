@@ -1,3 +1,4 @@
+import { render } from "nprogress"
 
 /**
  * 使用按钮
@@ -108,3 +109,11 @@ export const useSwitch = function(
   }
 }
 
+export const useSlot = function(renderSlot) {
+  return (context, h) => ({ 
+    functional: true,
+    render: function() {
+      return h(renderSlot(context, h));
+    } 
+  });
+};

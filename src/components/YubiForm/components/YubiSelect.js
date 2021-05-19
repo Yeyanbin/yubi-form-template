@@ -9,7 +9,6 @@ const YubiSelect = {
     ],
     render() {
       const { formConfig, formItem, handleAttrs, handleFunc } = this;
-
       const scopedSlots = {
         prefix: function(scope) {
           console.log('prepend', scope)
