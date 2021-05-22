@@ -32,7 +32,7 @@ export const ModelMixin = {
 /**
  * 不处理的attr
  */
-const WhiteList = ['options', 'show']
+const WhiteList = ['options', 'show', 'slots']
 
 export const BaseMixin = {
   props: {
@@ -41,6 +41,11 @@ export const BaseMixin = {
     formData: Object,
     that: Object,
     dispatch: Function,
+  },
+  data() {
+    return {
+      slots: this.formItem.slots?.(this.$createElement),
+    }
   },
   computed: {
     context() {

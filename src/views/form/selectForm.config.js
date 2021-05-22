@@ -1,4 +1,4 @@
-import { useButton, useRadios, useSwitch, useSelect, useSlot } from '../../components/YubiForm/createFormElement';
+import { useButton, useRadios, useSwitch, useSelect, useSlot, useInput } from '../../components/YubiForm/createFormElement';
 
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
@@ -138,12 +138,27 @@ const CityGuySwitch = useSwitch(
   'isCityGuy',
   '是否城镇户籍',
   {
-    slots: {
-      text: ({formData}, h/* 必须声明h但不能使用，因为会自动使用 */) => (<span>{  formData.isCityGuy? '城市人': '农村人' }</span>),
-    }
+    slots: (h) => ({
+      text: ({formData}) => (<span>{  formData.isCityGuy? '城市人': '农村人' }</span>),
+    })
   }
 )
 
+const TestInput = useInput(
+  'test',
+  '随便输入点什么？',
+  {
+    slots: (h) => ({
+      suffix: function () {
+        return (
+          <i class="el-input__icon el-icon-search"></i>
+        );
+      }
+    }),
+  }
+)
+
+console.log('test input: ', TestInput)
 
 const SubmitButton = useButton(
   '提交', 
@@ -190,7 +205,10 @@ const formLineList = [
     formItemList: { ProvinceSelect, CitySelect, CityGuySwitch }
   },
   {
-    formItemList: { SubmitButton, ResetButton }
+    formItemList: { TestInput },
+  },
+  {
+    formItemList: { SubmitButton, ResetButton}
   },
 ]
 

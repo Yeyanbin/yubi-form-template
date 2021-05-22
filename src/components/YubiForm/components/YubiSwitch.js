@@ -7,18 +7,14 @@ const YubiSwitch = {
       ModelMixin,
       BaseMixin,
     ],
-    render(h) {
-      const { formItem, handleAttrs } = this;
-      const { slots } = formItem;
-      console.log(h)
-
-      console.log(slots, slots.text(this.context, h));
+    render() {
+      const { formItem, handleAttrs, slots } = this;
 
       return (
         <div>
           <el-switch {...{ attrs: handleAttrs(formItem) }} v-model={this.modelValue}>
           </el-switch>
-          { slots.text &&  slots.text(this.context, h) }
+          { slots.text &&  slots.text(this.context) }
         </div>
 
       );

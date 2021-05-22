@@ -7,20 +7,20 @@ const YubiInput = {
     BaseMixin,
   ],
   render() {
-    const {  formItem } = this;
-    // const inputObj = <el-input scopedSlots={{prepend: ()=> 'aaa'}}></el-input>;
-    // console.log('inputObj', inputObj);
-    const scopedSlots = {
-      prefix: function(scope) {
-        console.log('prepend', scope)
-        return (
-          <i class="el-input__icon el-icon-search"></i>
-        );
-      }
-    }
+    const { formItem, slots } = this;
+
     return (
-      <el-input {...{ scopedSlots, attrs: formItem }} v-model={this.modelValue}>
-      </el-input>
+      <div>
+        <el-input {...{ attrs: formItem }} v-model={this.modelValue}>
+          {
+            Object.keys(slots).map(key => (
+              <template slot={key}>
+                {slots[key]()}
+              </template>
+            ))
+          }
+        </el-input>
+      </div>
     );
   },
 };
