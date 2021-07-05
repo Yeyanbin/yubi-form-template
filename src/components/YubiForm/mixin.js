@@ -44,7 +44,7 @@ export const BaseMixin = {
   },
   data() {
     return {
-      slots: this.formItem.slots?.(this.$createElement),
+      slots: this.formItem.slots,
     }
   },
   computed: {

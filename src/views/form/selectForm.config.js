@@ -1,4 +1,9 @@
 import { useButton, useRadios, useSwitch, useSelect, useSlot, useInput } from '../../components/YubiForm/createFormElement';
+import Vue from 'vue';
+
+let h = undefined;
+
+console.log(h = new Vue().$createElement)
 
 const provinceList = [
   { province_id: 0, province_name: '广东省' },
@@ -138,9 +143,9 @@ const CityGuySwitch = useSwitch(
   'isCityGuy',
   '是否城镇户籍',
   {
-    slots: (h) => ({
+    slots: {
       text: ({formData}) => (<span>{  formData.isCityGuy? '城市人': '农村人' }</span>),
-    })
+    }
   }
 )
 
@@ -148,13 +153,14 @@ const TestInput = useInput(
   'test',
   '随便输入点什么？',
   {
-    slots: (h) => ({
+    slots: {
       suffix: function () {
+        console.log('suffix', h);
         return (
           <i class="el-input__icon el-icon-search"></i>
         );
       }
-    }),
+    },
   }
 )
 

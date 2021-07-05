@@ -89,7 +89,18 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/eventBusDemo',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'eventBusDemo',
+        component: () => import('@/views/eventBusDemo/index.vue'),
+        meta: { title: 'eventBusDemo', icon: 'form' }
+      }
+    ]
+  },
   {
     path: '/nested',
     component: Layout,

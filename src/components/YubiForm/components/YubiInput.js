@@ -15,7 +15,7 @@ const YubiInput = {
           {
             Object.keys(slots).map(key => (
               <template slot={key}>
-                {slots[key]()}
+                {slots[key]}
               </template>
             ))
           }
