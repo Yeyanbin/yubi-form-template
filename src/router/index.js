@@ -102,6 +102,18 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/callStoreDemo',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'CallStoreDemo',
+        component: () => import('@/views/CallStoreDemo/index.vue'),
+        meta: { title: 'CallStoreDemo', icon: 'form' }
+      }
+    ]
+  },
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
